@@ -30,7 +30,7 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         super();
     }
 
-    private ObservableList<Staff> data = FXCollections.observableArrayList();
+    static ObservableList<Staff> data = FXCollections.observableArrayList();
     private ArrayList<Staff> listStaff;
     private String TAG = "StaffWindow";
 
@@ -57,6 +57,13 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         System.out.println(TAG);
         ViewFactory viewFactory = new ViewFactory();
         viewFactory.showAddMemberWindow();
+
+        data.addListener(new ListChangeListener<Staff>() {
+            @Override
+            public void onChanged(Change<? extends Staff> change) {
+                tbStaff.setItems(data);
+            }
+        });
     }
 
     @FXML
@@ -84,24 +91,11 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         tbStaff.setItems(data);
     }
 
-    public void uploadStaffOnTableView(ArrayList<Staff> list)
-    {
-        data.setAll(list);
-        tbStaff.setItems(data);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initColumnName();
         initListStaff();
         uploadStaffOnTableView();
-
-        data.addListener(new ListChangeListener<Staff>() {
-            @Override
-            public void onChanged(Change<? extends Staff> change) {
-                tbStaff.setItems(data);
-            }
-        });
     }
 
 

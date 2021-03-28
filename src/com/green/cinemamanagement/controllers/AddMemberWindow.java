@@ -77,17 +77,18 @@ public class AddMemberWindow extends BaseController implements Initializable {
         // add to list
         Staff staff = new Staff(getTxtID(), getTxtFirstName(), getTxtLastName());
         listStaff.add(staff);
+        StaffWindow.data.setAll(listStaff);
 
         // add to database
         Connection connection = new DBConnector().getDBConnection();
         StaffDAO staffDAO = new StaffDAO();
         staffDAO.insertTableStaff(connection, getTxtFirstName(),getTxtLastName());
 
-        closeStage();
-
         if (listener != null) {
             listener.onMemberAdded(staff);
         }
+
+        closeStage();
     }
 
     private void getListStaff()
