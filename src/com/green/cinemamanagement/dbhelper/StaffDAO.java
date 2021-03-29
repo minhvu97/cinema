@@ -182,6 +182,38 @@ public class StaffDAO {
         return result;
     }
 
+    public int deleteStaff(Connection connection, int id)
+    {
+        int result = 0;
+        Statement statement = null;
+        try
+        {
+            statement = connection.createStatement();
+            statement.executeUpdate(DELETE_TBL_STAFF.replace("#V1",String.valueOf(id)));
+
+            System.out.println("Deleted");
+        }
+        catch ( SQLException exception)
+        {
+            result = -1;
+            System.out.println("Delete note exception : " + exception.getMessage());
+        }
+        finally {
+            if (statement != null)
+            {
+                try
+                {
+                    statement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
     public int createTableLogin (Connection connection)
     {
         int result = 0;

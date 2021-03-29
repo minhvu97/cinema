@@ -33,6 +33,9 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
     static ObservableList<Staff> data = FXCollections.observableArrayList();
     private ArrayList<Staff> listStaff;
     private String TAG = "StaffWindow";
+    private int currentIndex = 0;
+    private Connection connection;
+    private StaffDAO staffDAO;
 
     @FXML
     private TableView<Staff> tbStaff;
@@ -68,7 +71,12 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
 
     @FXML
     void delSelected(ActionEvent event) {
-
+        if ( !data.isEmpty())
+        {
+            staffDAO.deleteStaff(connection,currentIndex+1);
+            listStaff.remove(currentIndex);
+            data.remove(currentIndex);
+        }
     }
 
     private void initColumnName()
@@ -81,8 +89,9 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
     private void initListStaff()
     {
         // hien thi cac dong du lieu
-        DBManager dbManager = new DBManager();
-        listStaff = dbManager.initDB();
+        connection = new DBConnector().getDBConnection();
+        staffDAO = new StaffDAO();
+        listStaff = staffDAO.getAllStaffs(connection);
     }
 
     public void uploadStaffOnTableView()
@@ -96,11 +105,25 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         initColumnName();
         initListStaff();
         uploadStaffOnTableView();
+
+        tbStaff.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
+            @Override
+            public void onChanged(Change<? extends Integer> newValue) {
+                System.out.println("Selected indices : " + newValue);
+                if ( newValue != null )
+                {
+                    int selectIndex = tbStaff.getSelectionModel().getSelectedIndex();
+                    currentIndex = selectIndex;
+                    System.out.println("current index =" + currentIndex);
+                }
+            }
+        });
     }
 
 
     @Override
     public void onMemberAdded(Staff staff) {
+        listStaff.add(staff);
         data.add(staff);
     }
 }
