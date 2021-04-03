@@ -16,7 +16,7 @@ public class StaffDAO {
     private static final String DROP_TBL_LOGIN = "DROP TABLE IF EXISTS LOGIN";
     private static final String CREATE_TBL_STAFF =
             "CREATE TABLE STAFF ("
-                    +"ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+                    +"ID INT NOT NULL PRIMARY KEY,"
                     +"FIRSTNAME VARCHAR(120),"
                     +"LASTNAME VARCHAR(120)"
                     +")"
@@ -150,14 +150,14 @@ public class StaffDAO {
         return result;
     }
 
-    public int insertTableStaff(Connection connection, String firstName, String lastName)
+    public int insertTableStaff(Connection connection, int id, String firstName, String lastName)
     {
         int result = 0;
         Statement statement = null;
         try
         {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_TBL_STAFF.replace("#V1",firstName).replace("#V2",lastName));
+            statement.executeUpdate(INSERT_TBL_STAFF_FULL.replace("#V1",String.valueOf(id)).replace("#V2",firstName).replace("#V3",lastName));
 
             System.out.println("Inserted");
         }

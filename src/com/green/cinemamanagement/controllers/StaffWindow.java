@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,7 +31,7 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         super();
     }
 
-    static ObservableList<Staff> data = FXCollections.observableArrayList();
+    private ObservableList<Staff> data = FXCollections.observableArrayList();
     private ArrayList<Staff> listStaff;
     private String TAG = "StaffWindow";
     private int currentIndex = 0;
@@ -59,23 +60,25 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
     void addMember(ActionEvent event) {
         System.out.println(TAG);
         ViewFactory viewFactory = new ViewFactory();
-        viewFactory.showAddMemberWindow();
+        viewFactory.showAddMemberWindow(this);
 
-        data.addListener(new ListChangeListener<Staff>() {
-            @Override
-            public void onChanged(Change<? extends Staff> change) {
-                tbStaff.setItems(data);
-            }
-        });
+//        new AddMemberWindow(this);
     }
 
     @FXML
     void delSelected(ActionEvent event) {
+        for (Staff staffCheck : listStaff)
+        {
+            System.out.println("staff " + staffCheck.getID() + ", got first name = " + staffCheck.getFirstName());
+        }
         if ( !data.isEmpty())
         {
-            staffDAO.deleteStaff(connection,currentIndex+1);
-            listStaff.remove(currentIndex);
-            data.remove(currentIndex);
+            System.out.println("data not empty");
+            int id_to_delete = data.get(currentIndex).getID();
+            listStaff.remove(tbStaff.getSelectionModel().getSelectedItem());
+            data.remove(tbStaff.getSelectionModel().getSelectedItem());
+            staffDAO.deleteStaff(connection,id_to_delete);
+
         }
     }
 
@@ -98,6 +101,7 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
     {
         data.setAll(listStaff);
         tbStaff.setItems(data);
+        tbStaff.getSelectionModel().selectLast();
     }
 
     @Override
@@ -106,6 +110,7 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         initListStaff();
         uploadStaffOnTableView();
 
+        currentIndex = tbStaff.getSelectionModel().getSelectedIndex();
         tbStaff.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
             @Override
             public void onChanged(Change<? extends Integer> newValue) {
@@ -114,8 +119,25 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
                 {
                     int selectIndex = tbStaff.getSelectionModel().getSelectedIndex();
                     currentIndex = selectIndex;
+
+                }
+            }
+        });
+        data.addListener(new ListChangeListener<Staff>() {
+            @Override
+            public void onChanged(Change<? extends Staff> change) {
+                tbStaff.setItems(data);
+                if (!listStaff.isEmpty()){
+                    System.out.println("list staff size = " + listStaff.size());
+                    System.out.println("data size = " + listStaff.size());
+                    tbStaff.getSelectionModel().select(listStaff.size() - 1);
+                    currentIndex = tbStaff.getSelectionModel().getSelectedIndex();
                     System.out.println("current index =" + currentIndex);
                 }
+                else {
+                    currentIndex = 0;
+                }
+                System.out.println("select last = " + currentIndex);
             }
         });
     }
@@ -123,7 +145,12 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
 
     @Override
     public void onMemberAdded(Staff staff) {
+        // add to list
+        System.out.println("member adddddddddd");
         listStaff.add(staff);
         data.add(staff);
+
+        // add to db
+        staffDAO.insertTableStaff(connection, staff.getID(),staff.getFirstName(), staff.getLastName());
     }
 }

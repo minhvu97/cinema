@@ -22,8 +22,8 @@ public class Launcher extends Application {
         StaffDAO staffDAO = new StaffDAO();
         staffDAO.createTableStaff(connection);
         staffDAO.createTableLogin(connection);
-        staffDAO.insertTableStaff(connection, "Minh","Vu");
-        staffDAO.insertTableStaff(connection, "Quynh","Vu");
+        staffDAO.insertTableStaff(connection, 1,"Minh","Vu");
+        staffDAO.insertTableStaff(connection, 2,"Quynh","Vu");
         staffDAO.insertTableLogin(connection, "1","1");
 
         viewFactory.showLoginWindow();

@@ -23,14 +23,12 @@ public class AddMemberWindow extends BaseController implements Initializable {
         void onMemberAdded(Staff staff);
     }
 
-    public AddMemberWindow(ViewFactory viewFactory, String fxmlName) {
+    public AddMemberWindow(ViewFactory viewFactory, String fxmlName, AddMemberInterface listener) {
         super(viewFactory, fxmlName);
-    }
-    private ArrayList<Staff> listStaff;
-
-    public void setListener(AddMemberInterface listener) {
         this.listener = listener;
     }
+
+    private ArrayList<Staff> listStaff;
 
     private AddMemberInterface listener;
 
@@ -74,17 +72,10 @@ public class AddMemberWindow extends BaseController implements Initializable {
             }
         }
 
-        // add to list
         Staff staff = new Staff(getTxtID(), getTxtFirstName(), getTxtLastName());
-        listStaff.add(staff);
-        StaffWindow.data.setAll(listStaff);
-
-        // add to database
-        Connection connection = new DBConnector().getDBConnection();
-        StaffDAO staffDAO = new StaffDAO();
-        staffDAO.insertTableStaff(connection, getTxtFirstName(),getTxtLastName());
 
         if (listener != null) {
+            System.out.println("on member add.");
             listener.onMemberAdded(staff);
         }
 

@@ -65,10 +65,10 @@ public class ViewFactory {
 
     }
 
-    public void showAddMemberWindow()
+    public void showAddMemberWindow(AddMemberWindow.AddMemberInterface listener)
     {
         System.out.println("showing add member window");
-        BaseController controller = new AddMemberWindow(this, "AddMemberWindow.fxml");
+        BaseController controller = new AddMemberWindow(this, "AddMemberWindow.fxml", listener);
         initializeStage(controller);
 
     }
