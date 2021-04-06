@@ -9,8 +9,8 @@
    <children>
       <Button fx:id="btnSave" layoutX="258.0" layoutY="161.0" mnemonicParsing="false" onAction="#actSave" text="Save" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="165.0" />
       <TextField fx:id="txtID" layoutX="189.0" layoutY="40.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="25.0" />
-      <TextField fx:id="txtLastName" layoutX="130.0" layoutY="136.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="125.0" />
       <TextField fx:id="txtFirstName" layoutX="130.0" layoutY="88.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="75.0" />
+      <TextField fx:id="txtLastName" layoutX="130.0" layoutY="136.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="125.0" />
       <Label layoutX="40.0" layoutY="29.0" text="ID" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="29.0" />
       <Label layoutX="41.0" layoutY="129.0" text="LastName" />
       <Label layoutX="38.0" layoutY="79.0" text="First Name" />

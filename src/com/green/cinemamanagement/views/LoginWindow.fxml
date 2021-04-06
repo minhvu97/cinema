@@ -14,10 +14,10 @@
             <Font size="34.0" />
          </font>
       </Button>
-      <TextField fx:id="txtUser" layoutX="174.0" layoutY="67.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="30.0" />
+      <TextField fx:id="tfUser" layoutX="174.0" layoutY="67.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="30.0" />
       <Label layoutX="53.0" layoutY="74.0" text="Password" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="74.0" />
       <Label layoutX="53.0" layoutY="34.0" text="Email" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="34.0" />
       <Label fx:id="lbError" layoutX="174.0" layoutY="106.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="106.0" />
-      <PasswordField fx:id="txtPassword" layoutX="174.0" layoutY="70.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="70.0" />
+      <PasswordField fx:id="tfPassword" layoutX="174.0" layoutY="70.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="70.0" />
    </children>
 </AnchorPane>

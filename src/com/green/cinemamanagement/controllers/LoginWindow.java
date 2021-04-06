@@ -3,26 +3,32 @@ import com.green.cinemamanagement.connectors.DBConnector;
 import com.green.cinemamanagement.dbhelper.StaffDAO;
 import com.green.cinemamanagement.models.Login;
 import com.green.cinemamanagement.views.ViewFactory;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.sql.Connection;
+import java.util.ResourceBundle;
 
-public class LoginWindow extends BaseController {
+public class LoginWindow extends BaseController implements Initializable {
 
     @FXML
     private Button btnLogin;
 
     @FXML
-    private TextField txtUser;
+    private TextField tfUser;
 
     @FXML
-    private PasswordField txtPassword;
+    private PasswordField tfPassword;
 
     @FXML
     private Label lbError;
@@ -37,8 +43,8 @@ public class LoginWindow extends BaseController {
         Connection connection = new DBConnector().getDBConnection();
         StaffDAO staffDAO = new StaffDAO();
         Login user = staffDAO.getLoginInfo(connection);
-        if ( txtUser.getText().equals(user.getEmail())
-                && txtPassword.getText().equals(user.getPassword()))
+        if ( tfUser.getText().equals(user.getEmail())
+                && tfPassword.getText().equals(user.getPassword()))
         {
             return true;
         }
@@ -47,21 +53,20 @@ public class LoginWindow extends BaseController {
 
     @FXML
     void actLogin(ActionEvent event) {
-        if (checkLogin())
-        {
-            System.out.println("you have login successfully");
-            ViewFactory viewFactory = new ViewFactory();
-            Stage stage = (Stage)lbError.getScene().getWindow();
-            viewFactory.closeStage(stage);
-            viewFactory.showMainWindow();
-        }
-        else if (txtUser.getText().equals(""))
+        if (tfUser.getText().equals(""))
         {
             lbError.setText("Please input Email!");
         }
-        else if (txtPassword.getText().equals(""))
+        else if (tfPassword.getText().equals(""))
         {
             lbError.setText("Please input Password!");
+        }
+        else if (checkLogin())
+        {
+            System.out.println("you have login successfully");
+            Stage stage = (Stage)lbError.getScene().getWindow();
+            viewFactory.closeStage(stage);
+            viewFactory.showMainWindow();
         }
         else
         {
@@ -69,4 +74,20 @@ public class LoginWindow extends BaseController {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        btnLogin.setDefaultButton(true);
+        tfUser.setPromptText("Input email");
+        tfPassword.setPromptText("Input password");
+        repeatFocus(tfUser);
+    }
+
+    private void repeatFocus(Node node) {
+        Platform.runLater(() -> {
+            if (!node.isFocused()) {
+                node.requestFocus();
+                repeatFocus(node);
+            }
+        });
+    }
 }

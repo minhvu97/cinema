@@ -19,14 +19,12 @@ public class MainWindow extends BaseController {
     @FXML
     void actMenuOption(ActionEvent event) {
         System.out.println(TAG + "::menuOptionAction()");
-        ViewFactory viewFactory = new ViewFactory();
         viewFactory.showOptionWindow();
     }
 
     @FXML
     void actStaff(ActionEvent event) {
         System.out.println(TAG + "::menuStaffMember");
-        ViewFactory viewFactory = new ViewFactory();
         viewFactory.showStaffWindow();
     }
 

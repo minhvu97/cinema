@@ -59,10 +59,7 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
     @FXML
     void addMember(ActionEvent event) {
         System.out.println(TAG);
-        ViewFactory viewFactory = new ViewFactory();
         viewFactory.showAddMemberWindow(this);
-
-//        new AddMemberWindow(this);
     }
 
     @FXML
