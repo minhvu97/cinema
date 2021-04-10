@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="278.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="btnLogin" layoutX="174.0" layoutY="291.0" mnemonicParsing="false" onAction="#actLogin" prefHeight="34.0" prefWidth="400.0" text="LOGIN" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="26.0">
+      <Button fx:id="btnLogin" layoutX="174.0" layoutY="291.0" mnemonicParsing="false" onAction="#onButtonLoginClicked" prefHeight="34.0" prefWidth="400.0" text="LOGIN" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="26.0">
          <font>
             <Font size="34.0" />
          </font>

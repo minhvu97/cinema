@@ -5,11 +5,13 @@ public class Staff {
     private int ID;
     private String firstName;
     private String lastName;
+    private String role;
 
-    public Staff(int ID, String firstName, String lastName) {
+    public Staff(int ID, String firstName, String lastName, String role) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 
     public Staff(){}
@@ -36,5 +38,13 @@ public class Staff {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

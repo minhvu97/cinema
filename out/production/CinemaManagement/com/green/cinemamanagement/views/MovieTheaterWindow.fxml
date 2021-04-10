@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="502.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tbvMovieList" layoutX="270.0" layoutY="7.0" prefHeight="373.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="colTheater" prefWidth="166.0" text="Cụm Rạp" />
+            <TableColumn fx:id="colCity" prefWidth="298.0" text="Thành phố" />
+            <TableColumn fx:id="colRate" prefWidth="135.0" text="Đánh giá" />
+        </columns>
+      </TableView>
+      <TextField layoutX="100.0" layoutY="14.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="60.0" />
+      <Label layoutX="67.0" layoutY="17.0" prefHeight="19.0" prefWidth="53.0" text="Tìm kiếm" AnchorPane.leftAnchor="60.0" />
+      <Line endX="386.0" layoutX="161.0" layoutY="83.0" startX="-93.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="100.0" />
+      <ComboBox fx:id="combTheater" layoutX="60.0" layoutY="53.0" prefHeight="25.0" prefWidth="141.0" promptText="Cụm rạp" />
+      <ComboBox fx:id="combCity" layoutX="216.0" layoutY="53.0" prefHeight="25.0" prefWidth="210.0" promptText="Thành phố" AnchorPane.leftAnchor="216.0" />
+      <ComboBox fx:id="combRate" layoutX="435.0" layoutY="53.0" prefHeight="25.0" prefWidth="100.0" promptText="Đánh giá" AnchorPane.rightAnchor="60.0" />
+   </children>
+</AnchorPane>

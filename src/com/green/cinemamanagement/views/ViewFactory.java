@@ -61,7 +61,7 @@ public class ViewFactory {
     {
         System.out.println("showing staff window");
         BaseController controller = new StaffWindow(this, "StaffWindow.fxml");
-        initializeStage(controller);
+        initializeStage(controller, true);
 
     }
 
@@ -69,8 +69,14 @@ public class ViewFactory {
     {
         System.out.println("showing add member window");
         BaseController controller = new AddMemberWindow(this, "AddMemberWindow.fxml", listener);
-        initializeStage(controller);
+        initializeStage(controller, true);
+    }
 
+    public void showMovieWindow()
+    {
+        System.out.println("showing add member window");
+        BaseController controller = new MovieTheaterWindow(this, "MovieTheaterWindow.fxml");
+        initializeStage(controller, true);
     }
 
     public void closeStage(Stage stage)

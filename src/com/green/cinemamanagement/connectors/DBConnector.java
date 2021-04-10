@@ -15,7 +15,7 @@ public class DBConnector {
     {
     }
 
-    public Connection getDBConnection()
+    public Connection getDBStaffConnection()
     {
 
         if (connection != null)

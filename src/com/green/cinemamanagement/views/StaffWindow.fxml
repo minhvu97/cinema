@@ -14,11 +14,12 @@
             <Font size="44.0" />
          </font>
       </Label>
-      <TableView fx:id="tbStaff" layoutY="108.0" prefHeight="269.0" prefWidth="586.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+      <TableView fx:id="tbStaff" layoutY="132.0" prefHeight="269.0" prefWidth="586.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="132.0">
         <columns>
-          <TableColumn fx:id="ColStaff" prefWidth="195.0" text="Staff_ID" />
-          <TableColumn fx:id="ColFirstName" prefWidth="195.0" text="FirstName" />
-            <TableColumn fx:id="ColLastName" minWidth="-1.0" prefWidth="209.0" text="LastName" />
+          <TableColumn fx:id="ColStaff" prefWidth="96.0" text="Staff_ID" />
+          <TableColumn fx:id="ColFirstName" prefWidth="197.0" text="FirstName" />
+            <TableColumn fx:id="ColLastName" minWidth="-1.0" prefWidth="193.0" text="LastName" />
+            <TableColumn fx:id="ColRole" prefWidth="113.0" text="Role" />
         </columns>
       </TableView>
       <AnchorPane layoutY="-1.0" opacity="0.16" prefHeight="132.0" prefWidth="600.0" style="-fx-background-color: BLUE;" AnchorPane.bottomAnchor="270.0" />

@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -40,9 +39,9 @@ public class LoginWindow extends BaseController implements Initializable {
 
     public boolean checkLogin()
     {
-        Connection connection = new DBConnector().getDBConnection();
+        Connection connection = new DBConnector().getDBStaffConnection();
         StaffDAO staffDAO = new StaffDAO();
-        Login user = staffDAO.getLoginInfo(connection);
+        Login user = staffDAO.getLoginInfo(connection, tfUser.getText());
         if ( tfUser.getText().equals(user.getEmail())
                 && tfPassword.getText().equals(user.getPassword()))
         {
@@ -52,7 +51,7 @@ public class LoginWindow extends BaseController implements Initializable {
     }
 
     @FXML
-    void actLogin(ActionEvent event) {
+    void onButtonLoginClicked(ActionEvent event) {
         if (tfUser.getText().equals(""))
         {
             lbError.setText("Please input Email!");

@@ -1,7 +1,6 @@
 package com.green.cinemamanagement.controllers;
 
 import com.green.cinemamanagement.connectors.DBConnector;
-import com.green.cinemamanagement.managers.DBManager;
 import com.green.cinemamanagement.models.Staff;
 import com.green.cinemamanagement.dbhelper.StaffDAO;
 import com.green.cinemamanagement.views.ViewFactory;
@@ -11,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -51,6 +49,9 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
     private TableColumn<Staff, String> ColLastName;
 
     @FXML
+    private TableColumn<Staff, String> ColRole;
+
+    @FXML
     private Button btnAdd;
 
     @FXML
@@ -84,12 +85,13 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         ColStaff.setCellValueFactory(new PropertyValueFactory<>("ID"));
         ColFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         ColLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ColRole.setCellValueFactory(new PropertyValueFactory<>("role"));
     }
 
     private void initListStaff()
     {
         // hien thi cac dong du lieu
-        connection = new DBConnector().getDBConnection();
+        connection = new DBConnector().getDBStaffConnection();
         staffDAO = new StaffDAO();
         listStaff = staffDAO.getAllStaffs(connection);
     }
@@ -146,8 +148,7 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         System.out.println("member adddddddddd");
         listStaff.add(staff);
         data.add(staff);
-
         // add to db
-        staffDAO.insertTableStaff(connection, staff.getID(),staff.getFirstName(), staff.getLastName());
+        staffDAO.insertTableStaff(connection, staff.getID(),staff.getFirstName(), staff.getLastName(), staff.getRole());
     }
 }

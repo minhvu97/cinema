@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class DBManager {
     public ArrayList<Staff> initDB()
     {
-        Connection connection = new DBConnector().getDBConnection();
+        Connection connection = new DBConnector().getDBStaffConnection();
         StaffDAO staffDAO = new StaffDAO();
         ArrayList<Staff> listStaff = staffDAO.getAllStaffs(connection);
         return listStaff;

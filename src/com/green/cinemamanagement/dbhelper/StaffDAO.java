@@ -11,14 +11,15 @@ import java.util.ArrayList;
 
 public class StaffDAO {
     private static final String QUERY_STAFF = "SELECT * FROM STAFF";
-    private static final String QUERY_LOGIN = "SELECT * FROM LOGIN";
+    private static final String QUERY_LOGIN = "SELECT * FROM LOGIN WHERE USER = '#V1'";
     private static final String DROP_TBL_STAFF = "DROP TABLE IF EXISTS STAFF";
     private static final String DROP_TBL_LOGIN = "DROP TABLE IF EXISTS LOGIN";
     private static final String CREATE_TBL_STAFF =
             "CREATE TABLE STAFF ("
                     +"ID INT NOT NULL PRIMARY KEY,"
                     +"FIRSTNAME VARCHAR(120),"
-                    +"LASTNAME VARCHAR(120)"
+                    +"LASTNAME VARCHAR(120),"
+                    +"ROLE VARCHAR(120)"
                     +")"
             ;
     private static final String CREATE_TBL_LOGIN =
@@ -34,7 +35,7 @@ public class StaffDAO {
             "INSERT INTO LOGIN (USER,PASS) VALUES('#V1','#V2')";
 
     private static final String INSERT_TBL_STAFF_FULL =
-            "INSERT INTO STAFF (ID,FIRSTNAME,LASTNAME) VALUES(#V1,'#V2','#V3')";
+            "INSERT INTO STAFF (ID,FIRSTNAME,LASTNAME,ROLE) VALUES(#V1,'#V2','#V3','#V4')";
 
     private static final String DELETE_TBL_STAFF =
             "DELETE FROM STAFF WHERE ID = #V1";
@@ -48,13 +49,14 @@ public class StaffDAO {
     public StaffDAO() {
     }
 
-    public Login getLoginInfo(Connection connection)
+    public Login getLoginInfo(Connection connection, String user)
     {
         Login login = new Login();
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_LOGIN);
+            String queryLogin = QUERY_LOGIN.replace("#V1", user);
+            ResultSet resultSet = statement.executeQuery(queryLogin);
             while ( resultSet.next())
             {
                 login.setId(resultSet.getInt(1));
@@ -95,6 +97,7 @@ public class StaffDAO {
                 staff.setID(resultSet.getInt(1));
                 staff.setFirstName(resultSet.getString(2));
                 staff.setLastName(resultSet.getString(3));
+                staff.setRole(resultSet.getString(4));
                 staffs.add(staff);
             }
         }
@@ -150,14 +153,14 @@ public class StaffDAO {
         return result;
     }
 
-    public int insertTableStaff(Connection connection, int id, String firstName, String lastName)
+    public int insertTableStaff(Connection connection, int id, String firstName, String lastName, String role)
     {
         int result = 0;
         Statement statement = null;
         try
         {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_TBL_STAFF_FULL.replace("#V1",String.valueOf(id)).replace("#V2",firstName).replace("#V3",lastName));
+            statement.executeUpdate(INSERT_TBL_STAFF_FULL.replace("#V1",String.valueOf(id)).replace("#V2",firstName).replace("#V3",lastName).replace("#V4",  role));
 
             System.out.println("Inserted");
         }

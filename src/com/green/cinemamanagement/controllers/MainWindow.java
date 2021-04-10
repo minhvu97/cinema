@@ -17,15 +17,21 @@ public class MainWindow extends BaseController {
     private MenuBar menuMain;
 
     @FXML
-    void actMenuOption(ActionEvent event) {
+    void onOptionClicked(ActionEvent event) {
         System.out.println(TAG + "::menuOptionAction()");
         viewFactory.showOptionWindow();
     }
 
     @FXML
-    void actStaff(ActionEvent event) {
+    void onStaffClicked(ActionEvent event) {
         System.out.println(TAG + "::menuStaffMember");
         viewFactory.showStaffWindow();
+    }
+
+    @FXML
+    void onMovieClicked(ActionEvent event) {
+        System.out.println(TAG + "::menuStaffMember");
+        viewFactory.showMovieWindow();
     }
 
 }

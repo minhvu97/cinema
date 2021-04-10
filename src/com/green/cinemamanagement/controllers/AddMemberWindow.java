@@ -1,20 +1,17 @@
 package com.green.cinemamanagement.controllers;
 
-import com.green.cinemamanagement.connectors.DBConnector;
-import com.green.cinemamanagement.dbhelper.StaffDAO;
 import com.green.cinemamanagement.managers.DBManager;
 import com.green.cinemamanagement.models.Staff;
 import com.green.cinemamanagement.views.ViewFactory;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -36,43 +33,64 @@ public class AddMemberWindow extends BaseController implements Initializable {
     private Button btnSave;
 
     @FXML
-    private TextField txtID;
+    private TextField tfID;
 
     @FXML
-    private TextField txtLastName;
+    private TextField tfLastName;
 
     @FXML
-    private TextField txtFirstName;
+    private TextField tfFirstName;
 
     @FXML
     private Label lblError;
 
-    public int getTxtID() {
-        String text = txtID.getText();
+    @FXML
+    private RadioButton radioManager;
+
+    @FXML
+    private ToggleGroup role;
+
+    @FXML
+    private RadioButton radioStaff;
+
+    public int getInputID() {
+        String text = tfID.getText();
         return Integer.parseInt(text);
     }
 
-    public String getTxtLastName() {
-        return txtLastName.getText();
+    public String getInputLastName() {
+        return tfLastName.getText();
     }
 
-    public String getTxtFirstName() {
-        return txtFirstName.getText();
+    public String getInputFirstName() {
+        return tfFirstName.getText();
+    }
+
+    public String getRole()
+    {
+        if (radioStaff.isSelected())
+        {
+            return "Staff";
+        }
+        else
+        {
+            return "Manager";
+        }
     }
 
     @FXML
-    void actSave(ActionEvent event) {
+    void onButtonSaveClicked(ActionEvent event) {
 
         for (Staff staffTemp : listStaff)
         {
-            if (staffTemp.getID() == getTxtID())
+            if (staffTemp.getID() == getInputID())
             {
                 lblError.setText("this ID has been used");
                 return;
             }
         }
 
-        Staff staff = new Staff(getTxtID(), getTxtFirstName(), getTxtLastName());
+        Staff staff = new Staff(getInputID(), getInputFirstName(), getInputLastName(), getRole());
 
         if (listener != null) {
             System.out.println("on member add.");
@@ -98,5 +116,17 @@ public class AddMemberWindow extends BaseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getListStaff();
+        btnSave.setDefaultButton(true);
+        radioStaff.setSelected(true);
+//        repeatFocus(tfID);
+    }
+
+    private void repeatFocus(Node node) {
+        Platform.runLater(() -> {
+            if (!node.isFocused()) {
+                node.requestFocus();
+                repeatFocus(node);
+            }
+        });
     }
 }
