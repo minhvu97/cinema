@@ -53,6 +53,12 @@ public class AddMemberWindow extends BaseController implements Initializable {
     @FXML
     private RadioButton radioStaff;
 
+    @FXML
+    private TextField tfEmail;
+
+    @FXML
+    private PasswordField tfPassword;
+
     public int getInputID() {
         String text = tfID.getText();
         return Integer.parseInt(text);
@@ -78,6 +84,16 @@ public class AddMemberWindow extends BaseController implements Initializable {
         }
     }
 
+    public String getInputEmail()
+    {
+        return tfEmail.getText();
+    }
+
+    public String getInputPassword()
+    {
+        return tfPassword.getText();
+    }
+
     @FXML
     void onButtonSaveClicked(ActionEvent event) {
 
@@ -90,7 +106,7 @@ public class AddMemberWindow extends BaseController implements Initializable {
             }
         }
 
-        Staff staff = new Staff(getInputID(), getInputFirstName(), getInputLastName(), getRole());
+        Staff staff = new Staff(getInputID(), getInputFirstName(), getInputLastName(), getRole(), getInputEmail(),getInputPassword());
 
         if (listener != null) {
             System.out.println("on member add.");
@@ -104,7 +120,7 @@ public class AddMemberWindow extends BaseController implements Initializable {
     {
         // hien thi cac dong du lieu
         DBManager dbManager = new DBManager();
-        listStaff = dbManager.initDB();
+        listStaff = dbManager.initStaffDB();
     }
 
     private void closeStage()
@@ -118,7 +134,7 @@ public class AddMemberWindow extends BaseController implements Initializable {
         getListStaff();
         btnSave.setDefaultButton(true);
         radioStaff.setSelected(true);
-//        repeatFocus(tfID);
+        repeatFocus(tfID);
     }
 
     private void repeatFocus(Node node) {

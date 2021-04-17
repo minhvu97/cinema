@@ -1,6 +1,6 @@
 CREATE SCHEMA if not exists `movietheater` DEFAULT CHARACTER SET utf8mb4 ;
 
-drop table if exists `theater`;
+drop table if exists `movietheater`.`theater`;
 create table `movietheater`.`theater`
 (
 	ID int primary key auto_increment,
@@ -9,7 +9,7 @@ create table `movietheater`.`theater`
     rate int
 );
 
-insert into `theater`(cumrap,thanhpho,rate)
+insert into `movietheater`.`theater`(cumrap,thanhpho,rate)
 values
 ("BHD","Hà Nội",3),
 ("MegaStar","Hà Nội",3),

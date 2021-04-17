@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="270.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="250.0" prefWidth="100.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Cụm rạp">
+                     <HBox.margin>
+                        <Insets left="20.0" top="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfCumRap" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets right="30.0" top="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Thành phố">
+                     <HBox.margin>
+                        <Insets left="20.0" top="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfThanhPho" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets right="30.0" top="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Đánh giá">
+                     <HBox.margin>
+                        <Insets left="20.0" top="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfRate" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets right="30.0" top="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="btnSave" layoutX="241.0" layoutY="230.0" mnemonicParsing="false" onAction="#onSaveClicked" text="Save" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="35.0" />
+   </children>
+</AnchorPane>

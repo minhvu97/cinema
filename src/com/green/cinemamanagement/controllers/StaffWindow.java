@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -35,6 +36,9 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
     private int currentIndex = 0;
     private Connection connection;
     private StaffDAO staffDAO;
+
+    @FXML
+    private Label lblRole;
 
     @FXML
     private TableView<Staff> tbStaff;
@@ -65,18 +69,14 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
 
     @FXML
     void delSelected(ActionEvent event) {
-        for (Staff staffCheck : listStaff)
-        {
-            System.out.println("staff " + staffCheck.getID() + ", got first name = " + staffCheck.getFirstName());
-        }
+
         if ( !data.isEmpty())
         {
             System.out.println("data not empty");
             int id_to_delete = data.get(currentIndex).getID();
-            listStaff.remove(tbStaff.getSelectionModel().getSelectedItem());
+//            listStaff.remove(tbStaff.getSelectionModel().getSelectedItem());
             data.remove(tbStaff.getSelectionModel().getSelectedItem());
             staffDAO.deleteStaff(connection,id_to_delete);
-
         }
     }
 
@@ -109,6 +109,23 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         initListStaff();
         uploadStaffOnTableView();
 
+        System.out.println("current user first name = " + currentUser.getFirstName());
+        System.out.println("current user last name = " + currentUser.getLastName());
+        if (currentUser.getRole().equals("Staff"))
+        {
+            lblRole.setText("Staff");
+            btnAdd.setDisable(true);
+            btnDel.setDisable(true);
+        }
+        else {
+            lblRole.setText("Manager");
+            if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
+                btnDel.setVisible(false);
+            } else {
+                btnDel.setVisible(true);
+            }
+        }
+
         currentIndex = tbStaff.getSelectionModel().getSelectedIndex();
         tbStaff.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
             @Override
@@ -119,24 +136,39 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
                     int selectIndex = tbStaff.getSelectionModel().getSelectedIndex();
                     currentIndex = selectIndex;
 
+                    if (!currentUser.getRole().equals("Staff")) {
+                        if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
+                            btnDel.setVisible(false);
+                        } else {
+                            btnDel.setVisible(true);
+                        }
+                    }
                 }
             }
         });
         data.addListener(new ListChangeListener<Staff>() {
             @Override
             public void onChanged(Change<? extends Staff> change) {
-                tbStaff.setItems(data);
-                if (!listStaff.isEmpty()){
-                    System.out.println("list staff size = " + listStaff.size());
-                    System.out.println("data size = " + listStaff.size());
-                    tbStaff.getSelectionModel().select(listStaff.size() - 1);
-                    currentIndex = tbStaff.getSelectionModel().getSelectedIndex();
-                    System.out.println("current index =" + currentIndex);
+                if (change != null) {
+                    if (!listStaff.isEmpty()) {
+                        System.out.println("list staff size = " + listStaff.size());
+                        System.out.println("data size = " + listStaff.size());
+                        tbStaff.getSelectionModel().select(listStaff.size() - 1);
+                        currentIndex = tbStaff.getSelectionModel().getSelectedIndex();
+                        System.out.println("current index =" + currentIndex);
+
+                        if (!currentUser.getRole().equals("Staff")) {
+                            if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
+                                btnDel.setVisible(false);
+                            } else {
+                                btnDel.setVisible(true);
+                            }
+                        }
+                    } else {
+                        currentIndex = 0;
+                    }
+                    System.out.println("select last = " + currentIndex);
                 }
-                else {
-                    currentIndex = 0;
-                }
-                System.out.println("select last = " + currentIndex);
             }
         });
     }
@@ -146,9 +178,9 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
     public void onMemberAdded(Staff staff) {
         // add to list
         System.out.println("member adddddddddd");
-        listStaff.add(staff);
+//        listStaff.add(staff);
         data.add(staff);
         // add to db
-        staffDAO.insertTableStaff(connection, staff.getID(),staff.getFirstName(), staff.getLastName(), staff.getRole());
+        staffDAO.insertTableStaff(connection, staff.getID(),staff.getFirstName(), staff.getLastName(), staff.getRole(),staff.getEmail(),staff.getPassword());
     }
 }

@@ -31,7 +31,13 @@ public class MainWindow extends BaseController {
     @FXML
     void onMovieClicked(ActionEvent event) {
         System.out.println(TAG + "::menuStaffMember");
-        viewFactory.showMovieWindow();
+        viewFactory.showMovieTheaterWindow();
+    }
+
+    @FXML
+    void onBanVeClicked(ActionEvent event) {
+        System.out.println(TAG + "::Ban Ve");
+        viewFactory.showBanVeWindow();
     }
 
 }

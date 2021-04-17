@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="113.0" layoutY="77.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox prefHeight="20.0">
+               <children>
+                  <Rectangle fx:id="seat1_1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat1_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat1_3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat1_4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat1_5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat1_6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat1_7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="55.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat1_8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="75.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0">
+               <children>
+                  <Rectangle fx:id="seat2_1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat2_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat2_3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat2_4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat2_5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat2_6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat2_7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="55.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat2_8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="75.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0">
+               <children>
+                  <Rectangle fx:id="seat3_1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat3_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat3_3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat3_4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat3_5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat3_6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat3_7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="55.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat3_8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="75.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="40.0" prefHeight="20.0">
+               <children>
+                  <Rectangle fx:id="seat4_1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat4_2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat4_3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat4_4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat4_5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat4_6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="35.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat4_7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="55.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+                  <Rectangle fx:id="seat4_8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="75.0" layoutY="10.0" onMouseClicked="#onMouseClicked" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Rectangle>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

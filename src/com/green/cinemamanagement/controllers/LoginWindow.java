@@ -1,7 +1,7 @@
 package com.green.cinemamanagement.controllers;
 import com.green.cinemamanagement.connectors.DBConnector;
 import com.green.cinemamanagement.dbhelper.StaffDAO;
-import com.green.cinemamanagement.models.Login;
+import com.green.cinemamanagement.models.Staff;
 import com.green.cinemamanagement.views.ViewFactory;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -41,10 +41,11 @@ public class LoginWindow extends BaseController implements Initializable {
     {
         Connection connection = new DBConnector().getDBStaffConnection();
         StaffDAO staffDAO = new StaffDAO();
-        Login user = staffDAO.getLoginInfo(connection, tfUser.getText());
+        Staff user = staffDAO.getLoginInfo(connection, tfUser.getText());
         if ( tfUser.getText().equals(user.getEmail())
                 && tfPassword.getText().equals(user.getPassword()))
         {
+            currentUser = user;
             return true;
         }
         return false;

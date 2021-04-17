@@ -1,6 +1,5 @@
 package com.green.cinemamanagement.dbhelper;
 
-import com.green.cinemamanagement.models.Login;
 import com.green.cinemamanagement.models.Staff;
 
 import java.sql.Connection;
@@ -11,9 +10,12 @@ import java.util.ArrayList;
 
 public class StaffDAO {
     private static final String QUERY_STAFF = "SELECT * FROM STAFF";
-    private static final String QUERY_LOGIN = "SELECT * FROM LOGIN WHERE USER = '#V1'";
+    private static final String QUERY_LOGIN = "SELECT * FROM STAFF WHERE EMAIL = '#V1'";
+
     private static final String DROP_TBL_STAFF = "DROP TABLE IF EXISTS STAFF";
+
     private static final String DROP_TBL_LOGIN = "DROP TABLE IF EXISTS LOGIN";
+
     private static final String CREATE_TBL_STAFF =
             "CREATE TABLE STAFF ("
                     +"ID INT NOT NULL PRIMARY KEY,"
@@ -35,7 +37,7 @@ public class StaffDAO {
             "INSERT INTO LOGIN (USER,PASS) VALUES('#V1','#V2')";
 
     private static final String INSERT_TBL_STAFF_FULL =
-            "INSERT INTO STAFF (ID,FIRSTNAME,LASTNAME,ROLE) VALUES(#V1,'#V2','#V3','#V4')";
+            "INSERT INTO STAFF (ID,FIRSTNAME,LASTNAME,ROLEE,EMAIL,PASS) VALUES(#V1,'#V2','#V3','#V4','#V5','#V6')";
 
     private static final String DELETE_TBL_STAFF =
             "DELETE FROM STAFF WHERE ID = #V1";
@@ -49,9 +51,9 @@ public class StaffDAO {
     public StaffDAO() {
     }
 
-    public Login getLoginInfo(Connection connection, String user)
+    public Staff getLoginInfo(Connection connection, String user)
     {
-        Login login = new Login();
+        Staff staff = new Staff();
         Statement statement = null;
         try {
             statement = connection.createStatement();
@@ -59,12 +61,15 @@ public class StaffDAO {
             ResultSet resultSet = statement.executeQuery(queryLogin);
             while ( resultSet.next())
             {
-                login.setId(resultSet.getInt(1));
-                login.setEmail(resultSet.getString(2));
-                login.setPassword(resultSet.getString(3));
+                staff.setID(resultSet.getInt(1));
+                staff.setFirstName(resultSet.getString(2));
+                staff.setLastName(resultSet.getString(3));
+                staff.setRole(resultSet.getString(4));
+                staff.setEmail(resultSet.getString(5));
+                staff.setPassword(resultSet.getString(6));
             }
         } catch (SQLException throwables) {
-            System.out.println("Get staffs exception : " + throwables.getMessage());
+            System.out.println("Get login exception : " + throwables.getMessage());
         }
         finally {
             if (statement != null)
@@ -79,7 +84,7 @@ public class StaffDAO {
                 }
             }
         }
-        return login;
+        return staff;
     }
 
     public ArrayList<Staff> getAllStaffs(Connection connection)
@@ -98,6 +103,8 @@ public class StaffDAO {
                 staff.setFirstName(resultSet.getString(2));
                 staff.setLastName(resultSet.getString(3));
                 staff.setRole(resultSet.getString(4));
+                staff.setEmail(resultSet.getString(5));
+                staff.setPassword(resultSet.getString(6));
                 staffs.add(staff);
             }
         }
@@ -121,46 +128,52 @@ public class StaffDAO {
         return staffs;
     }
 
-    public int createTableStaff (Connection connection)
+//    public int createTableStaff (Connection connection)
+//    {
+//        int result = 0;
+//        Statement statement = null;
+//        try
+//        {
+//            statement = connection.createStatement();
+//            statement.executeUpdate(DROP_TBL_STAFF);
+//            statement.executeUpdate(CREATE_TBL_STAFF);
+//            System.out.println("Table Staff Created");
+//        }
+//        catch ( SQLException exception)
+//        {
+//            result = -1;
+//            System.out.println("Create table exception : " + exception.getMessage());
+//        }
+//        finally {
+//            if (statement != null)
+//            {
+//                try
+//                {
+//                    statement.close();
+//                }
+//                catch (SQLException exception)
+//                {
+//                    exception.printStackTrace();
+//                }
+//            }
+//        }
+//        return result;
+//    }
+//
+    public int insertTableStaff(Connection connection, int id, String firstName, String lastName, String role, String email, String password)
     {
         int result = 0;
         Statement statement = null;
         try
         {
             statement = connection.createStatement();
-            statement.executeUpdate(DROP_TBL_STAFF);
-            statement.executeUpdate(CREATE_TBL_STAFF);
-            System.out.println("Table Staff Created");
-        }
-        catch ( SQLException exception)
-        {
-            result = -1;
-            System.out.println("Create table exception : " + exception.getMessage());
-        }
-        finally {
-            if (statement != null)
-            {
-                try
-                {
-                    statement.close();
-                }
-                catch (SQLException exception)
-                {
-                    exception.printStackTrace();
-                }
-            }
-        }
-        return result;
-    }
-
-    public int insertTableStaff(Connection connection, int id, String firstName, String lastName, String role)
-    {
-        int result = 0;
-        Statement statement = null;
-        try
-        {
-            statement = connection.createStatement();
-            statement.executeUpdate(INSERT_TBL_STAFF_FULL.replace("#V1",String.valueOf(id)).replace("#V2",firstName).replace("#V3",lastName).replace("#V4",  role));
+            statement.executeUpdate(INSERT_TBL_STAFF_FULL.replace("#V1",String.valueOf(id)).
+                    replace("#V2",firstName).
+                    replace("#V3",lastName).
+                    replace("#V4",  role).
+                    replace("#V5",email).
+                    replace("#V6",password))
+            ;
 
             System.out.println("Inserted");
         }
@@ -217,67 +230,67 @@ public class StaffDAO {
         return result;
     }
 
-    public int createTableLogin (Connection connection)
-    {
-        int result = 0;
-        Statement statement = null;
-        try
-        {
-            statement = connection.createStatement();
-            statement.executeUpdate(DROP_TBL_LOGIN);
-            statement.executeUpdate(CREATE_TBL_LOGIN);
-            System.out.println("Table Staff Created");
-        }
-        catch ( SQLException exception)
-        {
-            result = -1;
-            System.out.println("Create table exception : " + exception.getMessage());
-        }
-        finally {
-            if (statement != null)
-            {
-                try
-                {
-                    statement.close();
-                }
-                catch (SQLException exception)
-                {
-                    exception.printStackTrace();
-                }
-            }
-        }
-        return result;
-    }
+//    public int createTableLogin (Connection connection)
+//    {
+//        int result = 0;
+//        Statement statement = null;
+//        try
+//        {
+//            statement = connection.createStatement();
+//            statement.executeUpdate(DROP_TBL_LOGIN);
+//            statement.executeUpdate(CREATE_TBL_LOGIN);
+//            System.out.println("Table Staff Created");
+//        }
+//        catch ( SQLException exception)
+//        {
+//            result = -1;
+//            System.out.println("Create table exception : " + exception.getMessage());
+//        }
+//        finally {
+//            if (statement != null)
+//            {
+//                try
+//                {
+//                    statement.close();
+//                }
+//                catch (SQLException exception)
+//                {
+//                    exception.printStackTrace();
+//                }
+//            }
+//        }
+//        return result;
+//    }
 
-    public int insertTableLogin(Connection connection, String user, String pass)
-    {
-        int result = 0;
-        Statement statement = null;
-        try
-        {
-            statement = connection.createStatement();
-            statement.executeUpdate(INSERT_TBL_LOGIN.replace("#V1",user).replace("#V2",pass));
-
-            System.out.println("Inserted");
-        }
-        catch ( SQLException exception)
-        {
-            result = -1;
-            System.out.println("Insert table exception : " + exception.getMessage());
-        }
-        finally {
-            if (statement != null)
-            {
-                try
-                {
-                    statement.close();
-                }
-                catch (SQLException exception)
-                {
-                    exception.printStackTrace();
-                }
-            }
-        }
-        return result;
-    }
+//    public int insertTableLogin(Connection connection, String user, String pass)
+//    {
+//        int result = 0;
+//        Statement statement = null;
+//        try
+//        {
+//            statement = connection.createStatement();
+//            statement.executeUpdate(INSERT_TBL_LOGIN.replace("#V1",user).replace("#V2",pass));
+//
+//            System.out.println("Inserted");
+//        }
+//        catch ( SQLException exception)
+//        {
+//            result = -1;
+//            System.out.println("Insert table exception : " + exception.getMessage());
+//        }
+//        finally {
+//            if (statement != null)
+//            {
+//                try
+//                {
+//                    statement.close();
+//                }
+//                catch (SQLException exception)
+//                {
+//                    exception.printStackTrace();
+//                }
+//            }
+//        }
+//        return result;
+//    }
 }

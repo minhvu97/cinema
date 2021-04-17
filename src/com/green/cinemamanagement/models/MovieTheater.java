@@ -6,6 +6,14 @@ public class MovieTheater {
     private String thanhPho;
     private int rate;
 
+    public MovieTheater(String cumRap, String thanhPho, int rate) {
+        this.cumRap = cumRap;
+        this.thanhPho = thanhPho;
+        this.rate = rate;
+    }
+
+    public MovieTheater(){}
+
     public int getId() {
         return id;
     }

@@ -1,28 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="260.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="292.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="btnSave" layoutX="258.0" layoutY="161.0" mnemonicParsing="false" onAction="#onButtonSaveClicked" text="Save" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="40.0" />
-      <TextField fx:id="tfID" layoutX="189.0" layoutY="40.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="25.0" />
-      <TextField fx:id="tfFirstName" layoutX="130.0" layoutY="88.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="75.0" />
-      <TextField fx:id="tfLastName" layoutX="130.0" layoutY="136.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="125.0" />
-      <Label layoutX="40.0" layoutY="29.0" text="ID" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="29.0" />
-      <Label layoutX="41.0" layoutY="129.0" text="LastName" />
-      <Label layoutX="38.0" layoutY="79.0" text="First Name" AnchorPane.leftAnchor="40.0" />
-      <Label fx:id="lblError" layoutX="130.0" layoutY="50.0" />
-      <Label layoutX="38.0" layoutY="174.0" text="Role" AnchorPane.leftAnchor="40.0" />
-      <RadioButton fx:id="radioManager" layoutX="112.0" layoutY="175.0" mnemonicParsing="false" text="Manager">
-         <toggleGroup>
-            <ToggleGroup fx:id="role" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="radioStaff" layoutX="223.0" layoutY="174.0" mnemonicParsing="false" text="Staff" toggleGroup="$role" />
+      <VBox prefHeight="245.0" prefWidth="299.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="ID" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="31.0" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfID" prefWidth="180.0" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="First Name">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfFirstName" prefWidth="180.0">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="LastName">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfLastName" prefWidth="180.0">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label text="Role">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <RadioButton fx:id="radioManager" mnemonicParsing="false" text="Manager">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="role" />
+                     </toggleGroup>
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="radioStaff" mnemonicParsing="false" text="Staff" toggleGroup="$role">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </RadioButton>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="lblError" text="Email">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfEmail" prefWidth="180.0">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Password">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
+                  <PasswordField fx:id="tfPassword" prefWidth="180.0">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </PasswordField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -72,11 +72,25 @@ public class ViewFactory {
         initializeStage(controller, true);
     }
 
-    public void showMovieWindow()
+    public void showMovieTheaterWindow()
     {
-        System.out.println("showing add member window");
+        System.out.println("showing movie theater window");
         BaseController controller = new MovieTheaterWindow(this, "MovieTheaterWindow.fxml");
         initializeStage(controller, true);
+    }
+
+    public void showAddMovieTheaterWindow(AddMovieTheaterWindow.AddMovieTheaterInterface listener)
+    {
+        System.out.println("showing add movie theater window");
+        BaseController controller = new AddMovieTheaterWindow(this, "AddMovieTheaterWindow.fxml", listener);
+        initializeStage(controller, true);
+    }
+
+    public void showBanVeWindow()
+    {
+        System.out.println("showing ban ve window");
+        BaseController controller = new BanVeWindow(this,"BanVeWindow.fxml");
+        initializeStage(controller,true);
     }
 
     public void closeStage(Stage stage)
