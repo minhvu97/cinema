@@ -15,24 +15,22 @@
                   <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Movie Management">
+          <Menu mnemonicParsing="false" text="Movie">
             <items>
-              <MenuItem fx:id="btnMovie" mnemonicParsing="false" onAction="#onMovieClicked" text="Movie" />
+                  <MenuItem fx:id="menuMovieList" mnemonicParsing="false" onAction="#onMovieListClicked" text="Movie list" />
+              <MenuItem fx:id="menuMovieManagement" mnemonicParsing="false" onAction="#onMovieManagementClicked" text="Movie management" />
+                <MenuItem fx:id="menuBanVe" mnemonicParsing="false" onAction="#onBanVeClicked" text="BanVe" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Staft Management">
+          <Menu mnemonicParsing="false" text="Staft">
             <items>
-              <MenuItem fx:id="btnStaff" mnemonicParsing="false" onAction="#onStaffClicked" text="StaffTable" />
+              <MenuItem fx:id="menuStaffManagement" mnemonicParsing="false" onAction="#onStaffManagementClicked" text="Staff management" />
+                  <MenuItem fx:id="menuStaffList" mnemonicParsing="false" onAction="#onStaffListClicked" text="Staff list" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Help">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Ban Ve">
-              <items>
-                <MenuItem fx:id="btnBanVe" mnemonicParsing="false" onAction="#onBanVeClicked" text="BanVe" />
               </items>
             </Menu>
         </menus>

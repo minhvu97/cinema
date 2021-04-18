@@ -34,7 +34,10 @@ public class AddMovieTheaterWindow extends BaseController implements Initializab
     private TextField tfThanhPho;
 
     @FXML
-    private TextField tfRate;
+    private TextField tfPhim;
+
+    @FXML
+    private TextField tfSuatChieu;
 
     @FXML
     private Button btnSave;
@@ -47,15 +50,19 @@ public class AddMovieTheaterWindow extends BaseController implements Initializab
     {
         return tfThanhPho.getText();
     }
-    private int getInputRate()
+    private String getInputPhim()
     {
-        return Integer.parseInt(tfRate.getText());
+        return tfPhim.getText();
+    }
+    private String getInputSuatChieu()
+    {
+        return tfSuatChieu.getText();
     }
 
     @FXML
     void onSaveClicked(ActionEvent event) {
 
-        MovieTheater theater = new MovieTheater(getInputCumRap(), getInputThanhPho(), getInputRate());
+        MovieTheater theater = new MovieTheater(getInputCumRap(), getInputThanhPho(), getInputPhim(), getInputSuatChieu());
 
         if (listener != null) {
             listener.onMovieTheaterAdded(theater);

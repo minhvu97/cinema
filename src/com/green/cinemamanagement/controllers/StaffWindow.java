@@ -109,22 +109,22 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         initListStaff();
         uploadStaffOnTableView();
 
-        System.out.println("current user first name = " + currentUser.getFirstName());
-        System.out.println("current user last name = " + currentUser.getLastName());
-        if (currentUser.getRole().equals("Staff"))
-        {
-            lblRole.setText("Staff");
-            btnAdd.setDisable(true);
-            btnDel.setDisable(true);
-        }
-        else {
+//        System.out.println("current user first name = " + currentUser.getFirstName());
+//        System.out.println("current user last name = " + currentUser.getLastName());
+//        if (currentUser.getRole().equals("Staff"))
+//        {
+//            lblRole.setText("Staff");
+//            btnAdd.setDisable(true);
+//            btnDel.setDisable(true);
+//        }
+//        else {
             lblRole.setText("Manager");
             if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
                 btnDel.setVisible(false);
             } else {
                 btnDel.setVisible(true);
             }
-        }
+//        }
 
         currentIndex = tbStaff.getSelectionModel().getSelectedIndex();
         tbStaff.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
@@ -136,13 +136,13 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
                     int selectIndex = tbStaff.getSelectionModel().getSelectedIndex();
                     currentIndex = selectIndex;
 
-                    if (!currentUser.getRole().equals("Staff")) {
+//                    if (!currentUser.getRole().equals("Staff")) {
                         if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
                             btnDel.setVisible(false);
                         } else {
                             btnDel.setVisible(true);
                         }
-                    }
+//                    }
                 }
             }
         });
@@ -157,13 +157,13 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
                         currentIndex = tbStaff.getSelectionModel().getSelectedIndex();
                         System.out.println("current index =" + currentIndex);
 
-                        if (!currentUser.getRole().equals("Staff")) {
+//                        if (!currentUser.getRole().equals("Staff")) {
                             if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
                                 btnDel.setVisible(false);
                             } else {
                                 btnDel.setVisible(true);
                             }
-                        }
+//                        }
                     } else {
                         currentIndex = 0;
                     }

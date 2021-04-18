@@ -93,6 +93,26 @@ public class ViewFactory {
         initializeStage(controller,true);
     }
 
+    public void showSeatWindow(int theater_id)
+    {
+        System.out.println("showing seat window");
+        BaseController controller = new SeatWindow(this,"SeatWindow.fxml", theater_id);
+        initializeStage(controller,true);
+    }
+    public void showMovieTheaterList()
+    {
+        System.out.println("showing seat window");
+        BaseController controller = new ShowMovieTheaterList(this,"ShowMovieTheaterList.fxml");
+        initializeStage(controller,true);
+    }
+
+    public void showStaffList()
+    {
+        System.out.println("showing staff window");
+        BaseController controller = new ShowStaffList(this,"ShowStaffList.fxml");
+        initializeStage(controller,true);
+    }
+
     public void closeStage(Stage stage)
     {
         stage.close();

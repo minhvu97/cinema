@@ -4,12 +4,14 @@ public class MovieTheater {
     private int id;
     private String cumRap;
     private String thanhPho;
-    private int rate;
+    private String phim;
+    private String suatChieu;
 
-    public MovieTheater(String cumRap, String thanhPho, int rate) {
+    public MovieTheater( String cumRap, String thanhPho, String phim, String suatChieu) {
         this.cumRap = cumRap;
         this.thanhPho = thanhPho;
-        this.rate = rate;
+        this.phim = phim;
+        this.suatChieu = suatChieu;
     }
 
     public MovieTheater(){}
@@ -38,11 +40,19 @@ public class MovieTheater {
         this.thanhPho = thanhPho;
     }
 
-    public int getRate() {
-        return rate;
+    public String getPhim() {
+        return phim;
     }
 
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setPhim(String phim) {
+        this.phim = phim;
+    }
+
+    public String getSuatChieu() {
+        return suatChieu;
+    }
+
+    public void setSuatChieu(String suatChieu) {
+        this.suatChieu = suatChieu;
     }
 }

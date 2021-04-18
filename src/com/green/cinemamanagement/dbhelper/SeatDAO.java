@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SeatDAO {
-    private static final String QUERY_SEAT = "SELECT * FROM movietheater.Seat";
+    private static final String QUERY_SEAT = "SELECT * FROM movietheater.Seat WHERE THEATERID = '#V1'";
     private static final String DELETE_TBL_SEAT =
             "DELETE FROM Seat.Seat WHERE ID = #V1";
     private static final String INSERT_TBL_SEAT =
@@ -18,14 +18,14 @@ public class SeatDAO {
             "UPDATE movietheater.Seat SET TAKEN = '#V2' WHERE (id,theaterid) = ('#V1','#V3')";
     private static final String CHECK_SEAT = "SELECT * FROM movietheater.Seat WHERE TAKEN = 1 AND ID = '#V1' AND THEATERID = '#V3'";
 
-    public ArrayList<Seat> getAllSeat(Connection connection)
+    public ArrayList<Seat> getAllSeatWithTheaterID(Connection connection, int theater_id)
     {
         ArrayList<Seat> seats = new ArrayList<Seat>();
         Statement statement = null;
         try
         {
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_SEAT);
+            ResultSet resultSet = statement.executeQuery(QUERY_SEAT.replace("#V1",String.valueOf(theater_id)));
 
             while (resultSet.next())
             {

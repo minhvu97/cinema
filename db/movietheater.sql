@@ -4,17 +4,18 @@ drop table if exists `movietheater`.`theater`;
 create table `movietheater`.`theater`
 (
 	ID int primary key auto_increment,
-    cumrap varchar(50),
-    thanhpho varchar(50),
-    rate int
+	cumrap varchar(50),
+	thanhpho varchar(50),
+	phim varchar(50),
+    suatchieu varchar(50)
 );
 
-insert into `movietheater`.`theater`(cumrap,thanhpho,rate)
+insert into `movietheater`.`theater`(cumrap,thanhpho,phim,suatchieu)
 values
-("BHD","Hà Nội",3),
-("MegaStar","Hà Nội",3),
-("MegaStar","TpHCM",5),
-("Lotte","Hải Phòng",4),
-("CGV","TpHCM",4),
-("Galaxy","Vũng Tàu",2),
-("MegaStar","Hà Nội",5);
+("BHD","Hà Nội","Bố già","22h"),
+("MegaStar","Hà Nội","King Kong","3h"),
+("MegaStar","TpHCM","Gọdzilla","5h"),
+("Lotte","Hải Phòng","Avengers","4h"),
+("CGV","TpHCM","Kiều","4h"),
+("Galaxy","Vũng Tàu","Trạng Tí","2h"),
+("MegaStar","Hà Nội","Tom and Jerry","14h");

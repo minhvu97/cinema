@@ -42,7 +42,8 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
     private ComboBox<String> combCity;
 
     @FXML
-    private ComboBox<Integer> combRate;
+    private ComboBox<Integer> combPhim;
+
 
     @FXML
     private TableColumn<?, ?> colTheater;
@@ -51,7 +52,10 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
     private TableColumn<?, ?> colCity;
 
     @FXML
-    private TableColumn<?, ?> colRate;
+    private TableColumn<?, ?> colPhim;
+
+    @FXML
+    private TableColumn<?, ?> colSuatChieu;
 
     @FXML
     private Button btnAdd;
@@ -83,7 +87,9 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
     {
         colTheater.setCellValueFactory(new PropertyValueFactory<>("cumRap"));
         colCity.setCellValueFactory(new PropertyValueFactory<>("thanhPho"));
-        colRate.setCellValueFactory(new PropertyValueFactory<>("rate"));
+        colPhim.setCellValueFactory(new PropertyValueFactory<>("phim"));
+        colSuatChieu.setCellValueFactory(new PropertyValueFactory<>("suatChieu"));
+
     }
 
     private void initListTheater()
@@ -107,22 +113,23 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
         initListTheater();
         uploadTheaterToTableView();
 
-        if (combTheater != null)
-        {
-            combTheater.getItems().removeAll(combTheater.getItems());
-        }
-        if (combCity != null)
-        {
-            combCity.getItems().removeAll(combCity.getItems());
-        }
-        if (combRate != null) {
-            combRate.getItems().removeAll(combRate.getItems());
-        }
+//        if (combTheater != null)
+//        {
+//            combTheater.getItems().removeAll(combTheater.getItems());
+//        }
+//        if (combCity != null)
+//        {
+//            combCity.getItems().removeAll(combCity.getItems());
+//        }
+//        if (combRate != null) {
+//            combRate.getItems().removeAll(combRate.getItems());
+//        }
+//
+//        // init variables
+//        combTheater.getItems().addAll("CGV", "Lotte", "BHD", "Galaxy", "MegaStar");
+//        combCity.getItems().addAll("TpHCM","Hà Nội","Hải Phòng","Huế","Vũng Tàu","Cần Thơ");
+//        combRate.getItems().addAll(5,4,3,2,1);
 
-        // init variables
-        combTheater.getItems().addAll("CGV", "Lotte", "BHD", "Galaxy", "MegaStar");
-        combCity.getItems().addAll("TpHCM","Hà Nội","Hải Phòng","Huế","Vũng Tàu","Cần Thơ");
-        combRate.getItems().addAll(5,4,3,2,1);
         currentIndex = tbvMovieList.getSelectionModel().getSelectedIndex();
 
         tbvMovieList.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
@@ -156,7 +163,7 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
     @Override
     public void onMovieTheaterAdded(MovieTheater movieTheater) {
         // add to db
-        movieTheaterDAO.insertTableStaff(connection, movieTheater.getCumRap(), movieTheater.getThanhPho(), movieTheater.getRate());
+        movieTheaterDAO.insertTableMovieTheater(connection, movieTheater.getCumRap(), movieTheater.getThanhPho(), movieTheater.getPhim(), movieTheater.getSuatChieu());
         // add to list
         listTheater = movieTheaterDAO.getAllTheater(connection);
         data.setAll(listTheater);
