@@ -12,7 +12,8 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="btnOption" mnemonicParsing="false" onAction="#onOptionClicked" text="Option" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="btnÔption" mnemonicParsing="false" onAction="#onCloseClicked" text="Close" />
+                  <MenuItem fx:id="btnLogOut" mnemonicParsing="false" onAction="#onLogOutClicked" text="Log out" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Movie">

@@ -13,10 +13,10 @@
    <children>
       <TableView fx:id="tbvMovieList" layoutX="270.0" layoutY="7.0" prefHeight="330.0" prefWidth="601.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
         <columns>
-          <TableColumn fx:id="colTheater" prefWidth="105.0" text="Cụm Rạp" />
-            <TableColumn fx:id="colCity" prefWidth="178.0" text="Thành phố" />
-            <TableColumn fx:id="colPhim" prefWidth="220.0" text="Phim" />
-            <TableColumn fx:id="colSuatChieu" prefWidth="97.0" text="Suất chiếu" />
+          <TableColumn fx:id="colTheater" onEditCommit="#onCumRapChanged" prefWidth="105.0" text="Cụm Rạp" />
+            <TableColumn fx:id="colCity" onEditCommit="#onCityChanged" prefWidth="178.0" text="Thành phố" />
+            <TableColumn fx:id="colPhim" onEditCommit="#onMovieChanged" prefWidth="220.0" text="Phim" />
+            <TableColumn fx:id="colSuatChieu" onEditCommit="#onTimeChanged" prefWidth="97.0" text="Suất chiếu" />
         </columns>
       </TableView>
       <TextField layoutX="100.0" layoutY="14.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="60.0" />

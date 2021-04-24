@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -70,6 +71,19 @@ public class MainWindow extends BaseController implements Initializable {
     void onBanVeClicked(ActionEvent event) {
         System.out.println(TAG + "::Ban Ve");
         viewFactory.showBanVeWindow();
+    }
+
+    @FXML
+    void onCloseClicked(ActionEvent event) {
+        System.out.println(TAG + "::Close");
+        viewFactory.closeStage((Stage)menuMain.getScene().getWindow());
+    }
+
+    @FXML
+    void onLogOutClicked(ActionEvent event) {
+        System.out.println(TAG + "::Log out");
+        viewFactory.showLoginWindow();
+        viewFactory.closeStage((Stage)menuMain.getScene().getWindow());
     }
 
     @Override

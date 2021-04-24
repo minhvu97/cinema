@@ -54,29 +54,56 @@ public class BanVeWindow extends BaseController implements Initializable {
 
     @FXML
     void onCityChosen(ActionEvent event) {
-        cmbCumRap.setDisable(false);
-        ArrayList<String> cumRap = movieTheaterDAO.getAllTheaterAtCity(connection,cmbCity.getValue());
-        cmbCumRap.getItems().addAll(cumRap);
-    }
-
-    @FXML
-    void onMovieChosen(ActionEvent event) {
-        cmbTime.setDisable(false);
-        ArrayList<String> suatChieu = movieTheaterDAO.getAllTheaterAtCityAtCumRapWithMovie(connection,cmbCity.getValue(),cmbCumRap.getValue(),cmbPhim.getValue());
-        cmbTime.getItems().addAll(suatChieu);
+        if (cmbCity != null) {
+            btnSeat.setDisable(true);
+            ArrayList<String> cumRap = movieTheaterDAO.getAllTheaterAtCity(connection, cmbCity.getValue());
+            if (cmbCumRap != null) {
+                cmbCumRap.getItems().removeAll(cmbCumRap.getItems());
+            }
+            if (cmbPhim != null) {
+                cmbPhim.getItems().removeAll(cmbPhim.getItems());
+            }
+            if (cmbTime != null) {
+                cmbTime.getItems().removeAll(cmbTime.getItems());
+            }
+            cmbCumRap.getItems().addAll(cumRap);
+        }
     }
 
     @FXML
     void onTheaterChosen(ActionEvent event) {
-        cmbPhim.setDisable(false);
-        ArrayList<String> phim = movieTheaterDAO.getAllTheaterAtCityAtCumRap(connection,cmbCity.getValue(), cmbCumRap.getValue());
-        cmbPhim.getItems().addAll(phim);
+        if (cmbCumRap != null) {
+            btnSeat.setDisable(true);
+            ArrayList<String> phim = movieTheaterDAO.getAllTheaterAtCityAtCumRap(connection, cmbCity.getValue(), cmbCumRap.getValue());
+            if (cmbPhim != null) {
+                cmbPhim.getItems().removeAll(cmbPhim.getItems());
+            }
+            if (cmbTime != null) {
+                cmbTime.getItems().removeAll(cmbTime.getItems());
+            }
+            cmbPhim.getItems().addAll(phim);
+        }
+
+    }
+
+    @FXML
+    void onMovieChosen(ActionEvent event) {
+        if (cmbPhim != null) {
+            btnSeat.setDisable(true);
+            ArrayList<String> suatChieu = movieTheaterDAO.getAllTheaterAtCityAtCumRapWithMovie(connection, cmbCity.getValue(), cmbCumRap.getValue(), cmbPhim.getValue());
+            if (cmbTime != null) {
+                cmbTime.getItems().removeAll(cmbTime.getItems());
+            }
+            cmbTime.getItems().addAll(suatChieu);
+        }
     }
 
     @FXML
     void onTimeChosen(ActionEvent event) {
-        btnSeat.setDisable(false);
-        theater_id = movieTheaterDAO.getTheaterID(connection,cmbCity.getValue(),cmbCumRap.getValue(),cmbPhim.getValue(),cmbTime.getValue());
+        if (cmbTime != null) {
+            btnSeat.setDisable(false);
+            theater_id = movieTheaterDAO.getTheaterID(connection, cmbCity.getValue(), cmbCumRap.getValue(), cmbPhim.getValue(), cmbTime.getValue());
+        }
     }
 
     @Override
@@ -89,10 +116,6 @@ public class BanVeWindow extends BaseController implements Initializable {
         for(MovieTheater mv : listMovieTheater)
         {
             city.add(mv.getThanhPho());
-//            cumRap.add(mv.getCumRap());
-//            phim.add(mv.getPhim());
-//            time.add(mv.getSuatChieu());
-
         }
 
         if (cmbCity != null)
@@ -110,12 +133,9 @@ public class BanVeWindow extends BaseController implements Initializable {
             cmbTime.getItems().removeAll(cmbTime.getItems());
         }
 
-        cmbCumRap.setDisable(true);
-        cmbPhim.setDisable(true);
-        cmbTime.setDisable(true);
-
         // init variables
         cmbCity.getItems().addAll(city);
+        btnSeat.setDisable(true);
 
     }
 }

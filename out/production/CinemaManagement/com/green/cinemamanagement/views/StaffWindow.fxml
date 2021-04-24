@@ -17,8 +17,8 @@
       <TableView fx:id="tbStaff" layoutY="132.0" prefHeight="269.0" prefWidth="586.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="132.0">
         <columns>
           <TableColumn fx:id="ColStaff" prefWidth="96.0" text="Staff_ID" />
-          <TableColumn fx:id="ColFirstName" prefWidth="197.0" text="FirstName" />
-            <TableColumn fx:id="ColLastName" minWidth="-1.0" prefWidth="193.0" text="LastName" />
+          <TableColumn fx:id="ColFirstName" onEditCommit="#onFirstNameChanged" prefWidth="197.0" text="FirstName" />
+            <TableColumn fx:id="ColLastName" minWidth="-1.0" onEditCommit="#onLastNameChanged" prefWidth="193.0" text="LastName" />
             <TableColumn fx:id="ColRole" prefWidth="113.0" text="Role" />
         </columns>
       </TableView>

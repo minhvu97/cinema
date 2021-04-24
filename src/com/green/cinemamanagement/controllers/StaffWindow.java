@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -74,10 +75,25 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         {
             System.out.println("data not empty");
             int id_to_delete = data.get(currentIndex).getID();
-//            listStaff.remove(tbStaff.getSelectionModel().getSelectedItem());
             data.remove(tbStaff.getSelectionModel().getSelectedItem());
             staffDAO.deleteStaff(connection,id_to_delete);
         }
+    }
+
+    @FXML
+    void onFirstNameChanged(TableColumn.CellEditEvent<Staff,String> event) {
+        Staff staff = tbStaff.getSelectionModel().getSelectedItem();
+        staff.setFirstName(event.getNewValue());
+        staffDAO.UpdateFirstNameTableStaff(connection,staff.getID(),event.getNewValue());
+        data.set(currentIndex,staff);
+    }
+
+    @FXML
+    void onLastNameChanged(TableColumn.CellEditEvent<Staff,String> event) {
+        Staff staff = tbStaff.getSelectionModel().getSelectedItem();
+        staff.setLastName(event.getNewValue());
+        staffDAO.UpdateLastNameTableStaff(connection,staff.getID(),event.getNewValue());
+        data.set(currentIndex,staff);
     }
 
     private void initColumnName()
@@ -126,6 +142,11 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
             }
 //        }
 
+        // edit update
+        tbStaff.setEditable(true);
+        ColFirstName.setCellFactory(TextFieldTableCell.forTableColumn());
+        ColLastName.setCellFactory(TextFieldTableCell.forTableColumn());
+
         currentIndex = tbStaff.getSelectionModel().getSelectedIndex();
         tbStaff.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
             @Override
@@ -135,14 +156,14 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
                 {
                     int selectIndex = tbStaff.getSelectionModel().getSelectedIndex();
                     currentIndex = selectIndex;
-
-//                    if (!currentUser.getRole().equals("Staff")) {
+                    System.out.println("current index =" + currentIndex);
+                    if (tbStaff.getSelectionModel().getSelectedItem() != null) {
                         if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
                             btnDel.setVisible(false);
                         } else {
                             btnDel.setVisible(true);
                         }
-//                    }
+                    }
                 }
             }
         });

@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -46,16 +47,16 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
 
 
     @FXML
-    private TableColumn<?, ?> colTheater;
+    private TableColumn<MovieTheater, String> colTheater;
 
     @FXML
-    private TableColumn<?, ?> colCity;
+    private TableColumn<MovieTheater, String> colCity;
 
     @FXML
-    private TableColumn<?, ?> colPhim;
+    private TableColumn<MovieTheater, String> colPhim;
 
     @FXML
-    private TableColumn<?, ?> colSuatChieu;
+    private TableColumn<MovieTheater, String> colSuatChieu;
 
     @FXML
     private Button btnAdd;
@@ -72,10 +73,8 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
     void onDeleteClicked(ActionEvent event) {
         if ( !data.isEmpty())
         {
-//            int id_to_delete = data.get(currentIndex).getId();
             MovieTheater objectToDelete = tbvMovieList.getSelectionModel().getSelectedItem();
             System.out.println("current index = "+currentIndex+" , object ID = "+objectToDelete.getId());
-//            listTheater.remove(tbvMovieList.getSelectionModel().getSelectedItem());
             data.remove(currentIndex);
             movieTheaterDAO.deleteMovieTheater(connection,objectToDelete.getId());
 
@@ -83,6 +82,39 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
         }
     }
 
+    @FXML
+    void onCityChanged(TableColumn.CellEditEvent<MovieTheater,String> event) {
+        MovieTheater movieTheater = tbvMovieList.getSelectionModel().getSelectedItem();
+        movieTheater.setThanhPho(event.getNewValue());
+        movieTheaterDAO.UpdateCityTableTheater(connection,movieTheater.getId(),event.getNewValue());
+//        listTheater = movieTheaterDAO.getAllTheater(connection);
+//        data.setAll(listTheater);
+        data.set(currentIndex,movieTheater);
+    }
+
+    @FXML
+    void onCumRapChanged(TableColumn.CellEditEvent<MovieTheater,String> event) {
+        MovieTheater movieTheater = tbvMovieList.getSelectionModel().getSelectedItem();
+        movieTheater.setCumRap(event.getNewValue());
+        movieTheaterDAO.UpdateCumRapTableTheater(connection,movieTheater.getId(),event.getNewValue());
+        data.set(currentIndex,movieTheater);
+    }
+
+    @FXML
+    void onMovieChanged(TableColumn.CellEditEvent<MovieTheater,String> event) {
+        MovieTheater movieTheater = tbvMovieList.getSelectionModel().getSelectedItem();
+        movieTheater.setPhim(event.getNewValue());
+        movieTheaterDAO.UpdatePhimTableTheater(connection,movieTheater.getId(),event.getNewValue());
+        data.set(currentIndex,movieTheater);
+    }
+
+    @FXML
+    void onTimeChanged(TableColumn.CellEditEvent<MovieTheater,String> event) {
+        MovieTheater movieTheater = tbvMovieList.getSelectionModel().getSelectedItem();
+        movieTheater.setSuatChieu(event.getNewValue());
+        movieTheaterDAO.UpdateSuatChieuTableTheater(connection,movieTheater.getId(),event.getNewValue());
+        data.set(currentIndex,movieTheater);
+    }
     private void initColumnName()
     {
         colTheater.setCellValueFactory(new PropertyValueFactory<>("cumRap"));
@@ -113,22 +145,12 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
         initListTheater();
         uploadTheaterToTableView();
 
-//        if (combTheater != null)
-//        {
-//            combTheater.getItems().removeAll(combTheater.getItems());
-//        }
-//        if (combCity != null)
-//        {
-//            combCity.getItems().removeAll(combCity.getItems());
-//        }
-//        if (combRate != null) {
-//            combRate.getItems().removeAll(combRate.getItems());
-//        }
-//
-//        // init variables
-//        combTheater.getItems().addAll("CGV", "Lotte", "BHD", "Galaxy", "MegaStar");
-//        combCity.getItems().addAll("TpHCM","Hà Nội","Hải Phòng","Huế","Vũng Tàu","Cần Thơ");
-//        combRate.getItems().addAll(5,4,3,2,1);
+        // edit update
+        tbvMovieList.setEditable(true);
+        colSuatChieu.setCellFactory(TextFieldTableCell.forTableColumn());
+        colPhim.setCellFactory(TextFieldTableCell.forTableColumn());
+        colCity.setCellFactory(TextFieldTableCell.forTableColumn());
+        colTheater.setCellFactory(TextFieldTableCell.forTableColumn());
 
         currentIndex = tbvMovieList.getSelectionModel().getSelectedIndex();
 
@@ -143,6 +165,7 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
                 }
             }
         });
+
 
         data.addListener(new ListChangeListener<MovieTheater>() {
             @Override
