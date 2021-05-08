@@ -125,22 +125,12 @@ public class StaffWindow extends BaseController implements Initializable, AddMem
         initListStaff();
         uploadStaffOnTableView();
 
-//        System.out.println("current user first name = " + currentUser.getFirstName());
-//        System.out.println("current user last name = " + currentUser.getLastName());
-//        if (currentUser.getRole().equals("Staff"))
-//        {
-//            lblRole.setText("Staff");
-//            btnAdd.setDisable(true);
-//            btnDel.setDisable(true);
-//        }
-//        else {
-            lblRole.setText("Manager");
-            if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
-                btnDel.setVisible(false);
-            } else {
-                btnDel.setVisible(true);
-            }
-//        }
+        lblRole.setText("Manager");
+        if (currentUser.getID() == tbStaff.getSelectionModel().getSelectedItem().getID()) {
+            btnDel.setVisible(false);
+        } else {
+            btnDel.setVisible(true);
+        }
 
         // edit update
         tbStaff.setEditable(true);

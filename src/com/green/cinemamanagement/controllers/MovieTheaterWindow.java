@@ -10,12 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -43,8 +41,10 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
     private ComboBox<String> combCity;
 
     @FXML
-    private ComboBox<Integer> combPhim;
+    private ComboBox<String> combPhim;
 
+    @FXML
+    private ComboBox<String> combSuatChieu;
 
     @FXML
     private TableColumn<MovieTheater, String> colTheater;
@@ -65,6 +65,12 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
     private Button btnDelete;
 
     @FXML
+    private Button btnBanVe;
+
+    @FXML
+    private TextField findTextFiled;
+
+    @FXML
     void onAddClicked(ActionEvent event) {
         viewFactory.showAddMovieTheaterWindow(this);
     }
@@ -77,9 +83,13 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
             System.out.println("current index = "+currentIndex+" , object ID = "+objectToDelete.getId());
             data.remove(currentIndex);
             movieTheaterDAO.deleteMovieTheater(connection,objectToDelete.getId());
-
-
         }
+    }
+
+    @FXML
+    void onBanVeClicked(ActionEvent event) {
+        int theater_id = tbvMovieList.getSelectionModel().getSelectedItem().getId();
+        viewFactory.showChooseSeat(theater_id);
     }
 
     @FXML
@@ -87,8 +97,6 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
         MovieTheater movieTheater = tbvMovieList.getSelectionModel().getSelectedItem();
         movieTheater.setThanhPho(event.getNewValue());
         movieTheaterDAO.UpdateCityTableTheater(connection,movieTheater.getId(),event.getNewValue());
-//        listTheater = movieTheaterDAO.getAllTheater(connection);
-//        data.setAll(listTheater);
         data.set(currentIndex,movieTheater);
     }
 
@@ -115,13 +123,57 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
         movieTheaterDAO.UpdateSuatChieuTableTheater(connection,movieTheater.getId(),event.getNewValue());
         data.set(currentIndex,movieTheater);
     }
+
+    @FXML
+    void onCityChosen(ActionEvent event) {
+        listTheater = movieTheaterDAO.getComboboxResult(connection,combCity.getValue(),combTheater.getValue(),combPhim.getValue(),combSuatChieu.getValue());
+        data.setAll(listTheater);
+        tbvMovieList.setItems(data);
+        tbvMovieList.getSelectionModel().select(listTheater.size()-1);
+    }
+
+    @FXML
+    void onTheaterChosen(ActionEvent event) {
+        listTheater = movieTheaterDAO.getComboboxResult(connection,combCity.getValue(),combTheater.getValue(),combPhim.getValue(),combSuatChieu.getValue());
+        data.setAll(listTheater);
+        tbvMovieList.setItems(data);
+        tbvMovieList.getSelectionModel().select(listTheater.size()-1);
+    }
+
+    @FXML
+    void onMovieChosen(ActionEvent event) {
+        listTheater = movieTheaterDAO.getComboboxResult(connection,combCity.getValue(),combTheater.getValue(),combPhim.getValue(),combSuatChieu.getValue());
+        data.setAll(listTheater);
+        tbvMovieList.setItems(data);
+        tbvMovieList.getSelectionModel().select(listTheater.size()-1);
+    }
+
+    @FXML
+    void onTimeChosen(ActionEvent event) {
+        listTheater = movieTheaterDAO.getComboboxResult(connection,combCity.getValue(),combTheater.getValue(),combPhim.getValue(),combSuatChieu.getValue());
+        data.setAll(listTheater);
+        tbvMovieList.setItems(data);
+        tbvMovieList.getSelectionModel().select(listTheater.size()-1);
+    }
+
+    @FXML
+    void onInputTextField(KeyEvent event) {
+        listTheater = movieTheaterDAO.getTextFieldResult(connection,findTextFiled.getText());
+        for (MovieTheater theater : listTheater)
+        {
+            System.out.println(theater.getPhim());
+        }
+        data.setAll(listTheater);
+        tbvMovieList.setItems(data);
+        tbvMovieList.getSelectionModel().select(listTheater.size()-1);
+    }
+
     private void initColumnName()
     {
         colTheater.setCellValueFactory(new PropertyValueFactory<>("cumRap"));
         colCity.setCellValueFactory(new PropertyValueFactory<>("thanhPho"));
         colPhim.setCellValueFactory(new PropertyValueFactory<>("phim"));
         colSuatChieu.setCellValueFactory(new PropertyValueFactory<>("suatChieu"));
-
     }
 
     private void initListTheater()
@@ -136,7 +188,7 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
     {
         data.setAll(listTheater);
         tbvMovieList.setItems(data);
-        tbvMovieList.getSelectionModel().selectLast();
+        tbvMovieList.getSelectionModel().select(listTheater.size()-1);
     }
 
     @Override
@@ -152,7 +204,31 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
         colCity.setCellFactory(TextFieldTableCell.forTableColumn());
         colTheater.setCellFactory(TextFieldTableCell.forTableColumn());
 
+        // add combobox
+        combCity.setItems(FXCollections.observableArrayList(movieTheaterDAO.getAllCity(connection)));
+        combTheater.setItems(FXCollections.observableArrayList(movieTheaterDAO.getAllCumRap(connection)));
+        combPhim.setItems(FXCollections.observableArrayList(movieTheaterDAO.getAllPhim(connection)));
+        combSuatChieu.setItems(FXCollections.observableArrayList(movieTheaterDAO.getAllSuatChieu(connection)));
+
+        combCity.getItems().add("Tất cả");
+        combTheater.getItems().add("Tất cả");
+        combPhim.getItems().add("Tất cả");
+        combSuatChieu.getItems().add("Tất cả");
+
+        combCity.setValue("Tất cả");
+        combTheater.setValue("Tất cả");
+        combPhim.setValue("Tất cả");
+        combSuatChieu.setValue("Tất cả");
+
+        // Check user
+        if (currentUser.getRole().equals("Staff"))
+        {
+            btnAdd.setVisible(false);
+            btnDelete.setVisible(false);
+        }
+
         currentIndex = tbvMovieList.getSelectionModel().getSelectedIndex();
+        System.out.println("First current index: " + currentIndex);
 
         tbvMovieList.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
             @Override
@@ -188,7 +264,7 @@ public class MovieTheaterWindow extends BaseController implements Initializable 
         // add to db
         movieTheaterDAO.insertTableMovieTheater(connection, movieTheater.getCumRap(), movieTheater.getThanhPho(), movieTheater.getPhim(), movieTheater.getSuatChieu());
         // add to list
-        listTheater = movieTheaterDAO.getAllTheater(connection);
+        listTheater = movieTheaterDAO.getComboboxResult(connection,combCity.getValue(),combTheater.getValue(),combPhim.getValue(),combSuatChieu.getValue());
         data.setAll(listTheater);
     }
 }

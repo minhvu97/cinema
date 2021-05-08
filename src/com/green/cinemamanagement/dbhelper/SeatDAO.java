@@ -53,6 +53,41 @@ public class SeatDAO {
         return seats;
     }
 
+    public ArrayList<Seat> getMovieNameByID(Connection connection, int theater_id)
+    {
+        ArrayList<Seat> seats = new ArrayList<Seat>();
+        Statement statement = null;
+        try
+        {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY_SEAT.replace("#V1",String.valueOf(theater_id)));
+
+            while (resultSet.next())
+            {
+                Seat seat = new Seat(resultSet.getInt(1),resultSet.getBoolean(2),resultSet.getInt(3));
+                seats.add(seat);
+            }
+        }
+        catch ( SQLException exception)
+        {
+            System.out.println("Get theaters exception : " + exception.getMessage());
+        }
+        finally {
+            if (statement != null)
+            {
+                try
+                {
+                    statement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return seats;
+    }
+
     public int deleteSeat(Connection connection, int id)
     {
         int result = 0;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -199,11 +200,16 @@
                 </HBox>
             </children>
         </VBox>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4cd63" height="52.0" layoutX="150.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Label layoutX="194.0" layoutY="12.0" text="Screen">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4cd63" height="52.0" layoutX="125.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="250.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" />
+      <Label fx:id="lblMovieName" alignment="CENTER" contentDisplay="CENTER" layoutX="206.0" layoutY="18.0" text="Screen" textAlignment="CENTER">
          <font>
-            <Font size="38.0" />
+            <Font size="30.0" />
          </font>
       </Label>
+      <Button fx:id="btnDatVe" layoutX="362.0" layoutY="261.0" mnemonicParsing="false" onAction="#onDatVeClicked" text="Đặt vé" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

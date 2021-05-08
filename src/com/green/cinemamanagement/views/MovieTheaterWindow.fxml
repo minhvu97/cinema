@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
 
 <AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -19,14 +20,20 @@
             <TableColumn fx:id="colSuatChieu" onEditCommit="#onTimeChanged" prefWidth="97.0" text="Suất chiếu" />
         </columns>
       </TableView>
-      <TextField layoutX="100.0" layoutY="14.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.rightAnchor="60.0" />
+      <TextField fx:id="findTextFiled" layoutX="100.0" layoutY="14.0" onKeyTyped="#onInputTextField" prefHeight="25.0" prefWidth="400.0" promptText="Tìm tên phim ..." AnchorPane.rightAnchor="60.0" />
       <Label layoutX="67.0" layoutY="17.0" prefHeight="19.0" prefWidth="53.0" text="Tìm kiếm" AnchorPane.leftAnchor="60.0" />
       <Line endX="386.0" layoutX="161.0" layoutY="83.0" startX="-93.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="100.0" />
-      <ComboBox fx:id="combTheater" layoutX="60.0" layoutY="53.0" prefHeight="25.0" prefWidth="141.0" promptText="Cụm rạp" />
-      <ComboBox fx:id="combCity" layoutX="216.0" layoutY="53.0" prefHeight="25.0" prefWidth="210.0" promptText="Thành phố" AnchorPane.leftAnchor="216.0" />
-      <ComboBox fx:id="combRate" layoutX="435.0" layoutY="53.0" prefHeight="25.0" prefWidth="100.0" promptText="Đánh giá" AnchorPane.rightAnchor="60.0" />
+      <HBox layoutX="60.0" layoutY="55.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+         <children>
+            <ComboBox fx:id="combCity" onAction="#onCityChosen" prefHeight="25.0" prefWidth="119.0" promptText="Thành phố" />
+            <ComboBox fx:id="combTheater" onAction="#onTheaterChosen" prefHeight="25.0" prefWidth="109.0" promptText="Cụm rạp" />
+            <ComboBox fx:id="combPhim" onAction="#onMovieChosen" prefWidth="141.0" promptText="Phim" />
+            <ComboBox fx:id="combSuatChieu" onAction="#onTimeChosen" prefHeight="25.0" prefWidth="110.0" promptText="Suất Chiếu" />
+         </children>
+      </HBox>
       <Line endX="447.0" layoutX="153.0" layoutY="458.0" startX="-153.0" />
       <Button fx:id="btnAdd" layoutX="401.0" layoutY="459.0" mnemonicParsing="false" onAction="#onAddClicked" prefHeight="35.0" prefWidth="100.0" text="Add" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="100.0" />
       <Button fx:id="btnDelete" layoutX="441.0" layoutY="459.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="35.0" prefWidth="100.0" text="Delete" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="0.0" />
+      <Button fx:id="btnBanVe" layoutX="8.0" layoutY="458.0" mnemonicParsing="false" onAction="#onBanVeClicked" prefHeight="35.0" prefWidth="90.0" text="Bán vé" AnchorPane.leftAnchor="0.0" />
    </children>
 </AnchorPane>

@@ -20,7 +20,6 @@
             <items>
                   <MenuItem fx:id="menuMovieList" mnemonicParsing="false" onAction="#onMovieListClicked" text="Movie list" />
               <MenuItem fx:id="menuMovieManagement" mnemonicParsing="false" onAction="#onMovieManagementClicked" text="Movie management" />
-                <MenuItem fx:id="menuBanVe" mnemonicParsing="false" onAction="#onBanVeClicked" text="BanVe" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Staft">

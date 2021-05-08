@@ -2,14 +2,13 @@ package com.green.cinemamanagement.dbhelper;
 
 import com.green.cinemamanagement.models.MovieTheater;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class MovieTheaterDAO {
     private static final String QUERY_THEATER = "SELECT * FROM movietheater.theater";
+    private static final String QUERY_THEATER_BYID = "SELECT * FROM movietheater.theater where ID = ?";
+
     private static final String DELETE_TBL_THEATER =
             "DELETE FROM movietheater.theater WHERE ID = #V1";
     private static final String DELETE_TBL_SEAT =
@@ -27,6 +26,15 @@ public class MovieTheaterDAO {
     private static final String QUERY_CUMRAP = "SELECT PHIM FROM MOVIETHEATER.THEATER WHERE THANHPHO = '#V1' AND CUMRAP = '#V2'";
     private static final String QUERY_PHIM = "SELECT SUATCHIEU FROM MOVIETHEATER.THEATER WHERE THANHPHO = '#V1' AND CUMRAP = '#V2' AND PHIM = '#V3'";
     private static final String QUERY_THEATER_ID = "SELECT ID FROM MOVIETHEATER.THEATER WHERE THANHPHO = '#V1' AND CUMRAP = '#V2' AND PHIM = '#V3' AND SUATCHIEU = '#V4'";
+
+    private static final String QUERY_TEXTFIELD = "SELECT * FROM MOVIETHEATER.THEATER WHERE LOCATE(?,PHIM) = 1";
+
+    private static final String QUERY_ALL_THANHPHO = "SELECT DISTINCT THANHPHO FROM MOVIETHEATER.THEATER";
+    private static final String QUERY_ALL_CUMRAP = "SELECT DISTINCT CUMRAP FROM MOVIETHEATER.THEATER";
+    private static final String QUERY_ALL_PHIM = "SELECT DISTINCT PHIM FROM MOVIETHEATER.THEATER";
+    private static final String QUERY_ALL_SUATCHIEU = "SELECT DISTINCT SUATCHIEU FROM MOVIETHEATER.THEATER";
+
+    private static final String QUERY_COMBOBOX = "SELECT * FROM MOVIETHEATER.THEATER WHERE THANHPHO #V1 AND CUMRAP #V2 AND PHIM #V3 AND SUATCHIEU #V4";
 
     private static final String UPDATE_TBL_THEATER =
             "UPDATE movietheater.theater SET #VCol = '#V1' WHERE ID = #V2";
@@ -69,6 +77,303 @@ public class MovieTheaterDAO {
             }
         }
         return theaters;
+    }
+
+    public String getMovieNameByID(Connection connection, int id)
+    {
+        String name = "";
+        PreparedStatement preparedStatement = null;
+        try
+        {
+            preparedStatement = connection.prepareStatement(QUERY_THEATER_BYID);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next())
+            {
+                name = resultSet.getString(4);
+            }
+        }
+        catch ( SQLException exception)
+        {
+            System.out.println("Get name by id exception : " + exception.getMessage());
+        }
+        finally {
+            if (preparedStatement != null)
+            {
+                try
+                {
+                    preparedStatement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return name;
+    }
+
+    public ArrayList<MovieTheater> getTextFieldResult(Connection connection, String phim)
+    {
+        ArrayList<MovieTheater> theaters = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        try
+        {
+            preparedStatement = connection.prepareStatement(QUERY_TEXTFIELD);
+            preparedStatement.setString(1,phim);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next())
+            {
+                MovieTheater theater = new MovieTheater();
+                theater.setId(resultSet.getInt(1));
+                theater.setCumRap(resultSet.getString(2));
+                theater.setThanhPho(resultSet.getString(3));
+                theater.setPhim(resultSet.getString(4));
+                theater.setSuatChieu(resultSet.getString(5));
+                theaters.add(theater);
+            }
+        }
+        catch ( SQLException exception)
+        {
+            System.out.println("Get text field input exception : " + exception.getMessage());
+        }
+        finally {
+            if (preparedStatement != null)
+            {
+                try
+                {
+                    preparedStatement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return theaters;
+    }
+
+    public ArrayList<MovieTheater> getComboboxResult(Connection connection, String thanhpho, String cumrap, String phim, String suatchieu)
+    {
+        ArrayList<MovieTheater> theaters = new ArrayList<>();
+        Statement statement = null;
+        try
+        {
+            statement = connection.createStatement();
+
+            String thanhphoString, cumrapString, phimString, suatchieuString;
+
+            if (thanhpho.equals("Tất cả"))
+            {
+                thanhphoString = "in (SELECT THANHPHO FROM MOVIETHEATER.THEATER)";
+            }
+            else
+            {
+                thanhphoString = "= '" + thanhpho + "'";
+            }
+            if (cumrap.equals("Tất cả"))
+            {
+                cumrapString = "in (SELECT CUMRAP FROM MOVIETHEATER.THEATER)";
+            }
+            else
+            {
+                cumrapString = "= '" + cumrap + "'";
+            }
+            if (phim.equals("Tất cả"))
+            {
+                phimString = "in (SELECT PHIM FROM MOVIETHEATER.THEATER)";
+            }
+            else
+            {
+                phimString = "= '" + phim + "'";
+            }
+            if (suatchieu.equals("Tất cả"))
+            {
+                suatchieuString = "in (SELECT SUATCHIEU FROM MOVIETHEATER.THEATER)";
+            }
+            else
+            {
+                suatchieuString = "= '" + suatchieu + "'";
+            }
+            String queryString =
+                    QUERY_COMBOBOX.replace("#V1",thanhphoString)
+                            .replace("#V2", cumrapString)
+                            .replace("#V3",phimString)
+                            .replace("#V4",suatchieuString);
+
+            ResultSet resultSet = statement.executeQuery(queryString);
+
+            while (resultSet.next())
+            {
+                MovieTheater theater = new MovieTheater();
+                theater.setId(resultSet.getInt(1));
+                theater.setCumRap(resultSet.getString(2));
+                theater.setThanhPho(resultSet.getString(3));
+                theater.setPhim(resultSet.getString(4));
+                theater.setSuatChieu(resultSet.getString(5));
+                theaters.add(theater);
+            }
+        }
+        catch ( SQLException exception)
+        {
+            System.out.println("Get combobox exception : " + exception.getMessage());
+        }
+        finally {
+            if (statement != null)
+            {
+                try
+                {
+                    statement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return theaters;
+    }
+
+    public ArrayList<String> getAllCity(Connection connection)
+    {
+        ArrayList<String> listThanhpho = new ArrayList<>();
+        Statement statement = null;
+        try
+        {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY_ALL_THANHPHO);
+
+            while (resultSet.next())
+            {
+                String thanhpho = resultSet.getString(1);
+                listThanhpho.add(thanhpho);
+            }
+        }
+        catch ( SQLException exception)
+        {
+            System.out.println("Get thanhpho exception : " + exception.getMessage());
+        }
+        finally {
+            if (statement != null)
+            {
+                try
+                {
+                    statement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return listThanhpho;
+    }
+
+    public ArrayList<String> getAllCumRap(Connection connection)
+    {
+        ArrayList<String> listCumrap = new ArrayList<>();
+        Statement statement = null;
+        try
+        {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY_ALL_CUMRAP);
+
+            while (resultSet.next())
+            {
+                String cumrap = resultSet.getString(1);
+                listCumrap.add(cumrap);
+            }
+        }
+        catch ( SQLException exception)
+        {
+            System.out.println("Get cumrap exception : " + exception.getMessage());
+        }
+        finally {
+            if (statement != null)
+            {
+                try
+                {
+                    statement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return listCumrap;
+    }
+
+    public ArrayList<String> getAllPhim(Connection connection)
+    {
+        ArrayList<String> listPhim = new ArrayList<>();
+        Statement statement = null;
+        try
+        {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY_ALL_PHIM);
+
+            while (resultSet.next())
+            {
+                String phim = resultSet.getString(1);
+                listPhim.add(phim);
+            }
+        }
+        catch ( SQLException exception)
+        {
+            System.out.println("Get phim exception : " + exception.getMessage());
+        }
+        finally {
+            if (statement != null)
+            {
+                try
+                {
+                    statement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return listPhim;
+    }
+
+    public ArrayList<String> getAllSuatChieu(Connection connection)
+    {
+        ArrayList<String> listSuatChieu = new ArrayList<>();
+        Statement statement = null;
+        try
+        {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(QUERY_ALL_SUATCHIEU);
+
+            while (resultSet.next())
+            {
+                String suatChieu = resultSet.getString(1);
+                listSuatChieu.add(suatChieu);
+            }
+        }
+        catch ( SQLException exception)
+        {
+            System.out.println("Get suatChieu exception : " + exception.getMessage());
+        }
+        finally {
+            if (statement != null)
+            {
+                try
+                {
+                    statement.close();
+                }
+                catch (SQLException exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        return listSuatChieu;
     }
 
     public ArrayList<String> getAllTheaterAtCity(Connection connection, String thanhpho)

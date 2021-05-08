@@ -29,9 +29,6 @@ public class MainWindow extends BaseController implements Initializable {
     private MenuItem menuMovieManagement;
 
     @FXML
-    private MenuItem menuBanVe;
-
-    @FXML
     private MenuItem menuStaffManagement;
 
     @FXML
@@ -65,12 +62,6 @@ public class MainWindow extends BaseController implements Initializable {
     void onMovieListClicked(ActionEvent event) {
         System.out.println(TAG+ "::movie list");
         viewFactory.showMovieTheaterList();
-    }
-
-    @FXML
-    void onBanVeClicked(ActionEvent event) {
-        System.out.println(TAG + "::Ban Ve");
-        viewFactory.showBanVeWindow();
     }
 
     @FXML
